@@ -1,1 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
+/* Add application styles & imports to this file! */
+body {
+  color: white;
+  margin: 0;
+  padding: 0;
+  background-color: #0092ed;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+   font-weight: 300;
+}
+
+form {
+  width: 425px;
+}

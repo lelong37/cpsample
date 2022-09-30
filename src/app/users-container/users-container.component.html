@@ -1,0 +1,17 @@
+<button (click)="create()">Create</button>
+
+<app-user-tile 
+  *ngFor="let user of userFormArray" 
+  [user]="user"
+  [active]="selectedUser?.controls?.id?.value === user.controls.id.value"
+  (selected)="selectUser(user)"
+  (deleted)="deleteUser(user)">
+</app-user-tile>
+
+<br/>
+
+<app-user-form 
+  *ngIf="selectedUser" 
+  [form]="selectedUser" 
+  (save)="save($event)">
+</app-user-form>

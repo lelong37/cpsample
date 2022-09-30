@@ -1,0 +1,9 @@
+<article>
+  <img [class.highlighted]="active" (click)="select(user)">
+  <p>{{user?.controls!.name.value}} {{user?.controls!.lastName.value}}</p>
+  <p>
+    <span *ngFor="let tag of user?.controls!.tags.value">#{{tag}} </span>
+  </p>
+  <button (click)="select(user)">Edit</button>
+  <button (click)="delete(user)">Delete</button>
+</article>
