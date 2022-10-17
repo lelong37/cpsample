@@ -13,5 +13,5 @@
 <app-user-form 
   *ngIf="selectedUserForm" 
   [userForm]="selectedUserForm" 
-  (save)="save($event)">
+  (save)="save(selectedUserForm)">
 </app-user-form>
