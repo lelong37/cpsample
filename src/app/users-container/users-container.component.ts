@@ -15,7 +15,7 @@ export class UsersContainerComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.userForms = new FormArray(this.userService.get().map(u => createUserForm(u)));
+    this.userForms = this.userService.get();
   }
 
   selectUser(userForm: FormGroup<UserForm>) {
@@ -24,7 +24,7 @@ export class UsersContainerComponent implements OnInit {
 
   deleteUser(userForm: FormGroup<UserForm>){
     this.userService.delete(userForm.getRawValue());
-    this.userForms = new FormArray(this.userService.get().map(u => createUserForm(u)));
+    this.userForms = this.userService.get();
     this.selectedUserForm = null;
   }
 
@@ -43,7 +43,7 @@ export class UsersContainerComponent implements OnInit {
       this.userService.create(userForm.getRawValue());
     }
 
-    this.userForms = new FormArray(this.userService.get().map(u => createUserForm(u)));
+    this.userForms = this.userService.get();
     this.selectedUserForm = null;
   }
 

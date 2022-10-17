@@ -1,5 +1,7 @@
 import { User } from '../model/user';
 import { Injectable } from '@angular/core';
+import { FormArray, FormGroup } from '@angular/forms';
+import { createUserForm, UserForm } from '../model/user-form';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +16,8 @@ export class UserService {
     { id: '6', name: 'Mathew', lastName: 'Doe', tags: ['angular', 'typescript'] }
   ].map(e => new User(e.name, e.lastName, e.tags, e.id));
 
-  get(): User[] {
-    return [...this.users];
+  get(): FormArray<FormGroup<UserForm>> {
+    return new FormArray<FormGroup<UserForm>>(this.users.map(u => createUserForm(u)));
   }
 
   create(user:User) {
