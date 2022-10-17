@@ -18,18 +18,18 @@ export class UserService {
     return [...this.users];
   }
 
-  create(user: any) {
+  create(user:User) {
     user.id = `${this.users.length + 1}`;    
-    this.users.push(user);
+    this.users.push(user as any);
   }
 
-  edit(user: any) {
+  edit(user: User) {
     const index = this.users.findIndex(u => u.id === user.id);
     this.users[index].lastName = user.lastName;
     this.users[index].name = user.name;
   }
 
-  delete(user: any) {
+  delete(user: User) {
     const index = this.users.findIndex(u => u.id === user.id);
     this.users.splice(index, 1);
   }

@@ -23,7 +23,7 @@ export class UsersContainerComponent implements OnInit {
   }
 
   deleteUser(userForm: FormGroup<UserForm>){
-    this.userService.delete(userForm.value);
+    this.userService.delete(userForm.getRawValue());
     this.userForms = new FormArray(this.userService.get().map(u => createUserForm(u)));
     this.selectedUserForm = null;
   }
@@ -38,9 +38,9 @@ export class UsersContainerComponent implements OnInit {
     }
 
     if (userForm.controls.id.value) {
-      this.userService.edit(userForm.value);
+      this.userService.edit(userForm.getRawValue());
     } else {
-      this.userService.create(userForm.value);
+      this.userService.create(userForm.getRawValue());
     }
 
     this.userForms = new FormArray(this.userService.get().map(u => createUserForm(u)));

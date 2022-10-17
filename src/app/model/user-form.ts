@@ -2,9 +2,9 @@ import { FormControl, FormGroup } from "@angular/forms";
 import { User } from "./user";
 
 export interface UserForm {
-  id: FormControl<string | null>;
-  name: FormControl<string | null>;
-  lastName: FormControl<string | null>;
+  id: FormControl<string | null | undefined>;
+  name: FormControl<string | null | undefined>;
+  lastName: FormControl<string | null | undefined>;
   tags: FormControl<string[]>;
 }
 
