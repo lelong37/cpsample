@@ -16,7 +16,7 @@ export class UserService {
     { id: '6', name: 'Mathew', lastName: 'Doe', tags: ['angular', 'typescript'] }
   ].map(e => new User(e.name, e.lastName, e.tags, e.id));
 
-  get(): FormArray<FormGroup<UserForm>> {
+  get() {
     return new FormArray<FormGroup<UserForm>>(this.users.map(u => createUserForm(u)));
   }
 
