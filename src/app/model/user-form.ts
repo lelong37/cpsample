@@ -1,4 +1,4 @@
-import { FormArray, FormControl, FormGroup } from "@angular/forms";
+import { FormControl, FormGroup } from "@angular/forms";
 import { User } from "./user";
 
 export interface UserForm {
@@ -8,7 +8,7 @@ export interface UserForm {
   tags: FormControl<string[]>;
 }
 
-const userForm = (user: User = new User()) => {
+export const createUserForm = (user: User = new User()) => {
   return new FormGroup<UserForm>({
     id: new  FormControl(user.id),
     name: new FormControl(user.name),
@@ -16,5 +16,3 @@ const userForm = (user: User = new User()) => {
     tags: new FormControl<string[]>(user.tags, { nonNullable: true })
   });
 }
-
-export { userForm };

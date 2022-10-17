@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { FormArray, FormGroup } from '@angular/forms';
-import { userForm, UserForm } from '../model/user-form';
+import { createUserForm, UserForm } from '../model/user-form';
 
 @Component({
   selector: 'app-users',
@@ -9,45 +9,45 @@ import { userForm, UserForm } from '../model/user-form';
   styleUrls: ['./users-container.component.css']
 })
 export class UsersContainerComponent implements OnInit {
-  users = new FormArray<FormGroup<UserForm>>([]);
-  selectedUser: FormGroup<UserForm> | null = null;
+  userForms = new FormArray<FormGroup<UserForm>>([]);
+  selectedUserForm: FormGroup<UserForm> | null = null;
   
-  constructor(private data: UserService) { }
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.users = new FormArray(this.data.get().map(u => userForm(u)));
+    this.userForms = new FormArray(this.userService.get().map(u => createUserForm(u)));
   }
 
-  selectUser(user: FormGroup<UserForm>) {
-    this.selectedUser = user;
+  selectUser(userForm: FormGroup<UserForm>) {
+    this.selectedUserForm = userForm;
   }
 
-  deleteUser(user: FormGroup<UserForm>){
-    this.data.delete(user.value);
-    this.users = new FormArray(this.data.get().map(u => userForm(u)));
-    this.selectedUser = null;
+  deleteUser(userForm: FormGroup<UserForm>){
+    this.userService.delete(userForm.value);
+    this.userForms = new FormArray(this.userService.get().map(u => createUserForm(u)));
+    this.selectedUserForm = null;
   }
 
   create() {
-    this.selectedUser = userForm();
+    this.selectedUserForm = createUserForm();
   }
 
-  save(user: FormGroup<UserForm>) {
-    if (!user.valid) {
+  save(userForm: FormGroup<UserForm>) {
+    if (!userForm.valid) {
       return;
     }
 
-    if (user.controls.id.value) {
-      this.data.edit(user.value);
+    if (userForm.controls.id.value) {
+      this.userService.edit(userForm.value);
     } else {
-      this.data.create(user.value);
+      this.userService.create(userForm.value);
     }
 
-    this.users = new FormArray(this.data.get().map(u => userForm(u)));
-    this.selectedUser = null;
+    this.userForms = new FormArray(this.userService.get().map(u => createUserForm(u)));
+    this.selectedUserForm = null;
   }
 
   get userFormArray() {
-    return (this.users.controls as FormGroup<UserForm>[]);
+    return (this.userForms.controls as FormGroup<UserForm>[]);
   }
 }

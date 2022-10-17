@@ -2,8 +2,8 @@
 
 <app-user-tile 
   *ngFor="let user of userFormArray" 
-  [user]="user"
-  [active]="selectedUser?.controls?.id?.value === user.controls.id.value"
+  [userForm]="user"
+  [active]="selectedUserForm?.controls?.id?.value === user.controls.id.value"
   (selected)="selectUser(user)"
   (deleted)="deleteUser(user)">
 </app-user-tile>
@@ -11,7 +11,7 @@
 <br/>
 
 <app-user-form 
-  *ngIf="selectedUser" 
-  [form]="selectedUser" 
+  *ngIf="selectedUserForm" 
+  [userForm]="selectedUserForm" 
   (save)="save($event)">
 </app-user-form>
