@@ -15,16 +15,19 @@ import { UserForm } from '../model/user-form';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserTileComponent {
-  @Input() user: FormGroup<UserForm> | null = null;
+  _userForm: FormGroup<UserForm> | null = null;
+  @Input() set userForm(form: FormGroup){
+    this._userForm = form;
+  }
   @Input() active: boolean = false;
   @Output() selected: EventEmitter<FormGroup<UserForm>> = new EventEmitter<FormGroup<UserForm>>();
   @Output() deleted: EventEmitter<FormGroup<UserForm>> = new EventEmitter<FormGroup<UserForm>>();
 
-  select(user: FormGroup<UserForm> | null) {
-    if(user) this.selected.emit(user);    
+  select(userForm: FormGroup<UserForm> | null) {
+    if(userForm) this.selected.emit(userForm);    
   }
 
-  delete(user: FormGroup<UserForm> | null) {
-    if(user) this.deleted.emit(user);
+  delete(userForm: FormGroup<UserForm> | null) {
+    if(userForm) this.deleted.emit(userForm);
   }
 }

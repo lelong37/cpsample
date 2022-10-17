@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { UserForm, userForm } from '../model/user-form';
+import { createUserForm, UserForm } from '../model/user-form';
 
 @Component({
   selector: 'app-user-form',
@@ -8,10 +8,15 @@ import { UserForm, userForm } from '../model/user-form';
   styleUrls: ['./user-form.component.css']
 })
 export class UserFormComponent {
-  @Input() form = userForm();
+  @Input() set userForm(form: FormGroup){
+    this._userForm = form;
+  }
+
   @Output() save = new EventEmitter<FormGroup<UserForm>>();
+  
+  protected _userForm: FormGroup<UserForm> = createUserForm();
 
   onSave() {
-    this.save.emit(this.form);
+    this.save.emit(this.userForm);
   }
 }
