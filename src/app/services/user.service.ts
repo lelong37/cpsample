@@ -14,10 +14,12 @@ export class UserService {
     { id: '4', name: 'Paul', lastName: 'Doe', tags: ['angular', 'typescript'] },
     { id: '5', name: 'Peter', lastName: 'Doe', tags: ['angular', 'typescript'] },
     { id: '6', name: 'Mathew', lastName: 'Doe', tags: ['angular', 'typescript'] }
-  ].map(e => new User(e.name, e.lastName, e.tags, e.id));
+  ];
 
-  get(): FormArray<FormGroup<UserForm>> {
-    return new FormArray<FormGroup<UserForm>>(this.users.map(u => createUserForm(u)));
+  get() {
+    return new FormArray<FormGroup<UserForm>>(
+      this.users.map(u => createUserForm(u))
+    );
   }
 
   create(user:User) {
