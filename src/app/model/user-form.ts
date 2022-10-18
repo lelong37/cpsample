@@ -8,11 +8,10 @@ export interface UserForm {
   tags: FormControl<string[]>;
 }
 
-export const createUserForm = (user: User = new User()) => {
-  return new FormGroup<UserForm>({
-    id: new  FormControl(user.id),
+export const createUserForm = (user: User = new User()) =>
+  new FormGroup<UserForm>({
+    id: new FormControl(user.id),
     name: new FormControl(user.name),
     lastName: new FormControl(user.lastName),
     tags: new FormControl<string[]>(user.tags, { nonNullable: true })
-  });
-}
+  })
